@@ -1,6 +1,6 @@
 #!groovy?
 def GIT_COMMIT_SHORT = ""
-def mvnHome = tool 'jenkinsmvn';
+def mvnHome = tool 'jenkinsmvn'
 
 node {
 deleteDir()
