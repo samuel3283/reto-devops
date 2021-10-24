@@ -1,0 +1,8 @@
+server:
+  port: 8085
+url:
+application:
+  code: 6
+spring:
+  application:
+    name: ms-backend
