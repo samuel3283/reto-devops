@@ -1,6 +1,6 @@
 #!groovy?
 def GIT_COMMIT_SHORT = ""
-def mvnHome = tool "jenkinsmvn"
+
 node {
 deleteDir()
 stage('Descargar Fuentes') {
@@ -12,25 +12,21 @@ script {
     ).trim()
     GIT_COMMIT_SHORT = GIT_COMMIT.substring(0,8)
 }
+  
 }
-stage('Build')
-{	
-sh "${mvnHome}/bin/mvn package -Dmaven.test.skip=true"
+stage('Compilando con maven')
+{
+def mvnHome = tool 'jenkinsmvn';
+sh "${mvnHome}/bin/mvn clean package"
 }
-stage('Test')
-{	
-sh "${mvnHome}/bin/mvn test"
-junit "reports/**/*.xml"
-}
-stage('Deploy') {
+stage('Construyendo Docker ') {
 script{
 sh "docker build -t repobackend:${GIT_COMMIT_SHORT} ."
-sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
 }
 }
-stage('Functional Test') {
+stage('Iniciando Docker ') {
 script{
-sh "echo Finalizando"
+sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
 }
 }
 }
