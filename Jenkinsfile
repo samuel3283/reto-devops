@@ -24,7 +24,7 @@ stage('Test')
 {
 mvnHome = tool 'jenkinsmvn'
 sh "${mvnHome}/bin/mvn test"
-junit 'reports/**/*.xml' 
+//junit 'reports/**/*.xml' 
 }
 stage('Deploy') {
 script{
