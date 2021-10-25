@@ -35,7 +35,7 @@ sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
 }
 stage('Functional Test') {
 script{
-sh "/usr/share/jmeter/bin/jmeter -Jjmeter.save.saveservice.output_format=xml -n -t Test.jmx || exit 0"
+sh "/usr/share/jmeter/bin/jmeter -Jjmeter.save.saveservice.output_format=xml -JThread=$Thread -JIterations=$Iterations -n -t Test.jmx || exit 0"
 }
 }
 }
