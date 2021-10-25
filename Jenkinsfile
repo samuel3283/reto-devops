@@ -1,6 +1,6 @@
 #!groovy?
 def GIT_COMMIT_SHORT = ""
-def mvnHome = tool "jenkinsmvn"
+def mvnHome = ""
 
 node {
 deleteDir()
@@ -17,7 +17,14 @@ script {
 }
 stage('Test')
 {
-sh "${mvnHome}/bin/mvn clean package"
+mvnHome = tool 'jenkinsmvn'
+sh "${mvnHome}/bin/mvn package -Dmaven.test.skip=true"
+}
+stage('Test')
+{
+mvnHome = tool 'jenkinsmvn'
+sh "${mvnHome}/bin/mvn test"
+junit 'reports/**/*.xml' 
 }
 stage('Deploy') {
 script{
