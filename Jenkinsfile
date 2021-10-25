@@ -24,7 +24,7 @@ stage('Test')
 {
 mvnHome = tool 'jenkinsmvn'
 sh "${mvnHome}/bin/mvn test"
-//junit 'reports/**/*.xml' 
+junit 'target/surefire-reports/*.xml'
 }
 stage('Deploy') {
 script{
@@ -33,9 +33,9 @@ sh "docker build -t repobackend:${GIT_COMMIT_SHORT} ."
 sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
 }
 }
-stage('Finalizando') {
+stage('Functional Test') {
 script{
-sh "echo 'Finalizando'"
+sh "/usr/share/jmeter/bin/jmeter -Jjmeter.save.saveservice.output_format=xml -n -t Test.jmx || exit 0"
 }
 }
 }
