@@ -1,5 +1,6 @@
 #!groovy?
 def GIT_COMMIT_SHORT = ""
+def mvnHome = tool "jenkinsmvn"
 
 node {
 deleteDir()
@@ -14,19 +15,19 @@ script {
 }
   
 }
-stage('Compilando con maven')
+stage('Test')
 {
-def mvnHome = tool 'jenkinsmvn';
 sh "${mvnHome}/bin/mvn clean package"
 }
-stage('Construyendo Docker ') {
+stage('Deploy') {
 script{
 sh "docker build -t repobackend:${GIT_COMMIT_SHORT} ."
-}
-}
-stage('Iniciando Docker ') {
-script{
 sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
+}
+}
+stage('Finalizando') {
+script{
+sh "echo 'Finalizando'"
 }
 }
 }
