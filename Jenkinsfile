@@ -28,7 +28,7 @@ sh "${mvnHome}/bin/mvn test"
 }
 stage('Deploy') {
 script{
-sh "docker stop --time=300 $(docker ps -aq)"
+//sh "docker stop --time=300 $(docker ps -aq)"
 sh "docker build -t repobackend:${GIT_COMMIT_SHORT} ."
 sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
 }
