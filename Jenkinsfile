@@ -15,7 +15,7 @@ script {
 }
   
 }
-stage('Test')
+stage('Build')
 {
 mvnHome = tool 'jenkinsmvn'
 sh "${mvnHome}/bin/mvn package -Dmaven.test.skip=true"
@@ -29,8 +29,10 @@ junit 'target/surefire-reports/*.xml'
 stage('Deploy') {
 script{
 //sh "docker stop --time=300 $(docker ps -aq)"
+sh "docker stop backend"
+sh "docker rm backend"
 sh "docker build -t repobackend:${GIT_COMMIT_SHORT} ."
-sh "docker run -d -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
+sh "docker run -d --name backend -p 8085:8085 repobackend:${GIT_COMMIT_SHORT}"
 }
 }
 stage('Functional Test') {
