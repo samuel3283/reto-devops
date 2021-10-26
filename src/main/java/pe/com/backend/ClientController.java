@@ -56,7 +56,7 @@ public class ClientController {
 		Client c2 = new Client("vivi@gmail.com","Marco");
 		response.add(c2);
 		
-		response.add(new Client("chino@gmail.com","WWilmer"));
+		response.add(new Client("chino@gmail.com","Wilmer"));
 		}
 		
 		return response;
@@ -70,10 +70,11 @@ public class ClientController {
 		
 		List<Client> response = new ArrayList<Client>();
 						
-		Client c2 = new Client("vivi@gmail.com",entorno);
-		response.add(c2);
-		
-		response.add(new Client("chino@gmail.com","WWilmer"));
+		response.add(new Client("mvega@gmail.com","Martha Vega"));
+		response.add(new Client("rlopez@gmail.com","Rosario Lopez"));
+		response.add(new Client("vsalas@gmail.com","Vanesa Salas"));		
+		response.add(new Client("wrivera@gmail.com","Wilmer Rivera"));
+		response.add(new Client("jmartinez@gmail.com","Jose Martinez"));
 		
 		return response;
 	}
@@ -86,7 +87,7 @@ public class ClientController {
 		
 		Response response = new Response();
 		response.setCode("OK");
-		response.setDescription("Usuario "+ request.getNombre() + " grabado.");
+		response.setDescription("Usuario "+ request.getNombre() + " registrado.");
 		
 		return response;
 	}

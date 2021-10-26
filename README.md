@@ -1,20 +1,50 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+### Features
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+- Servicio Rest 
+- Desplegado desde jenkins a una instancia AWS EC2 con docker
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+####Stages del Pipeline　
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```
+Stage build
+Stage test
+Stage deploy
+Stage functional test
+
+```
+
+
+####Parametros del Pipeline　
+
+```
+Hilo: Número de hilos a ejecutar
+Repetición: Número de iteraciones por hilo
+
+```
+
+                    
+###Servicio Lista Clientes
+                    
+Key  | Value
+------------- | -------------
+Endpoint  | http://ec2-54-234-174-119.compute-1.amazonaws.com:8085/services/rest/listClient
+Method  | GET
+Response  | [{ "email": "sramos@gmail.com",   "nombre": "Sergio Ramos"  }]
+
+                
+----
+
+                    
+###Servicio Crea Cliente
+                    
+Key  | Value
+------------- | -------------
+Endpoint  | http://ec2-54-234-174-119.compute-1.amazonaws.com:8085/services/rest/crearcliente
+Method  | POST
+Request  | { "email": "sramos@gmail.com",   "nombre": "Sergio Ramos"  }
+Response  | { "code": "OK",  "description": "Usuario Sergio Ramos grabado." }
+
+                
+----
+
