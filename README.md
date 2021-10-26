@@ -2,6 +2,7 @@
 
 - Servicio Rest 
 - Desplegado desde jenkins a una instancia AWS EC2 con docker
+- Utiliza JMeter para el functional test
 
 
 ####Stages del Pipeline　
@@ -15,7 +16,7 @@ Stage functional test
 ```
 
 
-####Parametros del Pipeline　
+####Parametros del Pipeline　para integración con JMeter
 
 ```
 Hilo: Número de hilos a ejecutar
